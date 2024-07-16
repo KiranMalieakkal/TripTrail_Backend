@@ -3,7 +3,8 @@ debug: true
 api:
     base-path: /api
     controllers:
-        carts: /carts
+        users: /users
+        trips: /trips
 server:
     port: 3000
 spring:
