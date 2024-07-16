@@ -12,10 +12,10 @@ public class Country {
 
     @Id
     @Column(name = "country_id")
-    private String countryId;
+    private Long countryId;
 
     @Column(name = "country_name", nullable = false)
-    private String name;
+    private String countryName;
 
 
     @Column(name = "countryFlag_url", nullable = false)
@@ -24,9 +24,9 @@ public class Country {
     @OneToMany(mappedBy ="country", cascade = CascadeType.REMOVE)
     private List<Trip> trips;
 
-    public Country(String countryId, String name, String countryFlagUrl) {
+    public Country(Long countryId, String name, String countryFlagUrl) {
         this.countryId = countryId;
-        this.name = name;
+        this.countryName = countryName;
         this.countryFlagUrl = countryFlagUrl;
     }
 
@@ -35,11 +35,11 @@ public class Country {
 
     }
 
-    public String getCountryId() {
+    public Long getCountryId() {
         return countryId;
     }
 
-    public void setCountryId(String countryId) {
+    public void setCountryId(Long countryId) {
         this.countryId = countryId;
     }
 
@@ -51,12 +51,12 @@ public class Country {
         this.countryFlagUrl = countryFlagUrl;
     }
 
-    public String getName() {
-        return name;
+    public String getCountryName() {
+        return countryName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setName(String CountryName) {
+        this.countryName = countryName;
     }
 
 }
