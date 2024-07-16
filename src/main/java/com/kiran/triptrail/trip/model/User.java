@@ -15,6 +15,7 @@ public class User {
     @Column(name = "userName")
     private String userName;
 
+    @Column
     private Long id;
 
     @OneToMany(mappedBy = "user", cascade = {CascadeType.MERGE, CascadeType.REMOVE})
