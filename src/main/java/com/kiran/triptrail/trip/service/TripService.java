@@ -2,6 +2,8 @@ package com.kiran.triptrail.trip.service;
 
 import com.kiran.triptrail.country.model.Country;
 import com.kiran.triptrail.country.repository.CountryRepository;
+import com.kiran.triptrail.trip.model.AddTripDto;
+import com.kiran.triptrail.trip.model.Trip;
 import com.kiran.triptrail.trip.model.User;
 import com.kiran.triptrail.trip.repository.TripRepository;
 import com.kiran.triptrail.trip.repository.UserRepository;
@@ -44,6 +46,19 @@ public class TripService {
 
     public void deleteTrip(long tripId) {
         tripRepository.deleteTrip(tripId);
+    }
+
+    public Trip updateTrip(long tripId, AddTripDto tripDto) {
+        Trip trip = tripRepository.findById(tripId);
+        Country country = countryRepository.getByCountryName(tripDto.countryName());
+        trip.setPlaces(tripDto.places());
+        trip.setStartDate(tripDto.startDate());
+        trip.setDuration(tripDto.duration());
+        trip.setBudget(tripDto.budget());
+        trip.setJournalEntry(tripDto.journalEntry());
+        trip.setTravelTips(tripDto.travelTips());
+        trip.setCountry(country);
+        return tripRepository.saveTrip(trip);
     }
 }
 

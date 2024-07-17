@@ -1,17 +1,16 @@
 package com.kiran.triptrail.trip.controller;
 
-import com.kiran.triptrail.trip.model.AddTripDto;
-import com.kiran.triptrail.trip.model.Trip;
-import com.kiran.triptrail.trip.model.User;
-import com.kiran.triptrail.trip.model.UserDto;
+import com.kiran.triptrail.trip.model.*;
 import com.kiran.triptrail.trip.service.TripService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
+import java.util.List;
 
 @RestController
+@CrossOrigin
 @RequestMapping("${api.base-path}${api.controllers.users}")
 public class Controller {
     @Value("${api.base-path}${api.controllers.users}/")
@@ -29,6 +28,14 @@ public class Controller {
         return ResponseEntity.ok(UserDto.fromUser(user));
     }
 
+    @GetMapping("/{userName}/trips")
+    public ResponseEntity<List<TripDto>> getTripsByUserName(@PathVariable String userName) {
+        User user = service.getUserByUserName(userName);
+        List<TripDto> tripDtos = user.getTrips().stream()
+                .map(trip -> TripDto.fromTrip(trip)).toList();
+        return ResponseEntity.ok(tripDtos);
+    }
+
     @PostMapping
     public ResponseEntity<UserDto> createUser() {
         User user = service.createUser();
@@ -38,10 +45,8 @@ public class Controller {
 
     @PostMapping("/{userName}/trips")
     public ResponseEntity<UserDto> addTripToUser(@PathVariable String userName,
-                                                     @RequestBody AddTripDto tripDto) {
-        System.out.println("userName = " + userName);
-        System.out.println("tripDto = " + tripDto);
-                
+                                                 @RequestBody AddTripDto tripDto) {
+
         User user = service.addTripToUser(userName,
                 tripDto.countryName(),
                 tripDto.places(),
@@ -56,9 +61,17 @@ public class Controller {
 
 
     @DeleteMapping("/{username}/trips/{tripId}")
-    public ResponseEntity<Void> deleteTrip(@PathVariable long tripId ) {
+    public ResponseEntity<Void> deleteTrip(@PathVariable long tripId) {
         service.deleteTrip(tripId);
         return ResponseEntity.noContent().build();
+    }
+
+    @PatchMapping("/{username}/trips/{tripId}")
+    public ResponseEntity<TripDto> addTripToUser(@PathVariable long tripId,
+                                                 @RequestBody AddTripDto tripDto) {
+        Trip trip = service.updateTrip(tripId, tripDto);
+        TripDto dto = TripDto.fromTrip(trip);
+        return ResponseEntity.accepted().body(dto);
     }
 }
 

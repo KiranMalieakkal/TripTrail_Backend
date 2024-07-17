@@ -1,5 +1,4 @@
 -- SQL file to insert country data into the countries table
-DELETE FROM countries;
 INSERT INTO countries (country_id, country_flag_url, country_name) VALUES (1, 'http://example.com/flags/afghanistan.png', 'Afghanistan');
 INSERT INTO countries (country_id, country_flag_url, country_name) VALUES (2, 'http://example.com/flags/albania.png', 'Albania');
 INSERT INTO countries (country_id, country_flag_url, country_name) VALUES (3, 'http://example.com/flags/algeria.png', 'Algeria');
@@ -177,3 +176,6 @@ INSERT INTO countries (country_id, country_flag_url, country_name) VALUES (174, 
 INSERT INTO countries (country_id, country_flag_url, country_name) VALUES (175, 'http://example.com/flags/yemen.png', 'Yemen');
 INSERT INTO countries (country_id, country_flag_url, country_name) VALUES (176, 'http://example.com/flags/zambia.png', 'Zambia');
 INSERT INTO countries (country_id, country_flag_url, country_name) VALUES (177, 'http://example.com/flags/zimbabwe.png', 'Zimbabwe');
+
+INSERT INTO owner (user_name, id) VALUES ('user1',1);
+INSERT INTO owner (user_name, id) VALUES ('user2',2);

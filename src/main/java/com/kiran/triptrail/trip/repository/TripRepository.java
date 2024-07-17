@@ -1,5 +1,6 @@
 package com.kiran.triptrail.trip.repository;
 
+import com.kiran.triptrail.trip.model.Trip;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -12,5 +13,13 @@ public class TripRepository {
 
     public void deleteTrip(long tripId) {
         repo.deleteById(tripId);
+    }
+
+    public Trip findById(long tripId) {
+        return repo.findById(tripId).orElseThrow();
+    }
+
+    public Trip saveTrip(Trip trip) {
+        return repo.save(trip);
     }
 }
