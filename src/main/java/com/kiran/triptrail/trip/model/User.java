@@ -19,10 +19,10 @@ public class User {
     private Long id;
 
     @OneToMany(mappedBy = "user", cascade = {CascadeType.MERGE, CascadeType.REMOVE})
-    private List<Trip> trips = new ArrayList<>();
+    private List<Trip> trips;
 
     public User() {
-//        this.trips = new ArrayList<>();
+        this.trips = new ArrayList<>();
     }
 
     public User(String userName, Long id, List<Trip> trips) {
