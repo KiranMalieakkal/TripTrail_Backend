@@ -31,7 +31,7 @@ public class Controller {
 
     @PostMapping
     public ResponseEntity<UserDto> createUser() {
-        User user = service.createCart();
+        User user = service.createUser();
         UserDto dto = UserDto.fromUser(user);
         return ResponseEntity.created(URI.create(API_CONTEXT_ROOT + user.getUserName())).body(dto);
     }
@@ -54,11 +54,11 @@ public class Controller {
         return ResponseEntity.accepted().body(dto);
     }
 
-//
-//    @DeleteMapping("/{cartId}")
-//    public ResponseEntity<Void> deleteCart(@PathVariable String cartId) {
-//        service.deleteCart(cartId);
-//        return ResponseEntity.noContent().build();
-//    }
+
+    @DeleteMapping("/{username}/trips/{tripId}")
+    public ResponseEntity<Void> deleteTrip(@PathVariable long tripId ) {
+        service.deleteTrip(tripId);
+        return ResponseEntity.noContent().build();
+    }
 }
 

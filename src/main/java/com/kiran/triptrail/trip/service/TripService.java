@@ -3,6 +3,7 @@ package com.kiran.triptrail.trip.service;
 import com.kiran.triptrail.country.model.Country;
 import com.kiran.triptrail.country.repository.CountryRepository;
 import com.kiran.triptrail.trip.model.User;
+import com.kiran.triptrail.trip.repository.TripRepository;
 import com.kiran.triptrail.trip.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
@@ -11,10 +12,12 @@ public class TripService {
 
     private final CountryRepository countryRepository;
     private final UserRepository userRepository;
+    private final TripRepository tripRepository;
 
-    public TripService(CountryRepository countryRepository, UserRepository userRepository) {
+    public TripService(CountryRepository countryRepository, UserRepository userRepository, TripRepository tripRepository) {
         this.countryRepository = countryRepository;
         this.userRepository = userRepository;
+        this.tripRepository= tripRepository;
     }
 
 
@@ -22,7 +25,7 @@ public class TripService {
         return userRepository.getByUserName(userName);
     }
 
-    public User createCart() {
+    public User createUser() {
         return userRepository.createUser();
     }
 
@@ -37,6 +40,10 @@ public class TripService {
         }
         user.addTrip(country,places,startDate,duration,budget,travelTips,journalEntry);
         return userRepository.saveUser(user);
+    }
+
+    public void deleteTrip(long tripId) {
+        tripRepository.deleteTrip(tripId);
     }
 }
 

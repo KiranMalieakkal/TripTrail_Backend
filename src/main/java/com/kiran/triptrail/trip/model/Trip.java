@@ -6,9 +6,10 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "trips")
 public class Trip {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer tripId;
+    private Long tripId;
 
     @Column
     private String places;
@@ -113,5 +114,8 @@ public class Trip {
 
     public void setCountry(Country country) {
         this.country = country;
+    }
+    public Long getTripId() {
+        return tripId;
     }
 }
