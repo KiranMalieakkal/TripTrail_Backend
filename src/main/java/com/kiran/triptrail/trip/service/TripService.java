@@ -4,6 +4,7 @@ import com.kiran.triptrail.country.model.Country;
 import com.kiran.triptrail.country.repository.CountryRepository;
 import com.kiran.triptrail.trip.model.AddTripDto;
 import com.kiran.triptrail.trip.model.Trip;
+import com.kiran.triptrail.trip.model.TripDto;
 import com.kiran.triptrail.trip.model.User;
 import com.kiran.triptrail.trip.repository.TripRepository;
 import com.kiran.triptrail.trip.repository.UserRepository;
@@ -59,6 +60,10 @@ public class TripService {
         trip.setTravelTips(tripDto.travelTips());
         trip.setCountry(country);
         return tripRepository.saveTrip(trip);
+    }
+
+    public Trip getTripById(long tripId) {
+        return tripRepository.findById(tripId);
     }
 }
 

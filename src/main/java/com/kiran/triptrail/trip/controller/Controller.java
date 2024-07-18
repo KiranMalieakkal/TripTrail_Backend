@@ -36,6 +36,12 @@ public class Controller {
         return ResponseEntity.ok(tripDtos);
     }
 
+    @GetMapping("/{userName}/trips/{tripId}")
+    public ResponseEntity<TripDto> getTripsById(@PathVariable long tripId) {
+        Trip trip = service.getTripById(tripId);
+        return ResponseEntity.ok(TripDto.fromTrip(trip));
+    }
+
     @PostMapping
     public ResponseEntity<UserDto> createUser() {
         User user = service.createUser();
@@ -69,6 +75,7 @@ public class Controller {
     @PatchMapping("/{username}/trips/{tripId}")
     public ResponseEntity<TripDto> addTripToUser(@PathVariable long tripId,
                                                  @RequestBody AddTripDto tripDto) {
+        System.out.println("tripId = " + tripDto);
         Trip trip = service.updateTrip(tripId, tripDto);
         TripDto dto = TripDto.fromTrip(trip);
         return ResponseEntity.accepted().body(dto);
