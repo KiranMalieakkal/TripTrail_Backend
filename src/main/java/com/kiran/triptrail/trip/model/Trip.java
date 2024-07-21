@@ -11,7 +11,7 @@ public class Trip {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long tripId;
 
-    @Column
+    @Column(columnDefinition = "TEXT")
     private String places;
 
     @Column
@@ -23,10 +23,10 @@ public class Trip {
     @Column
     private Long budget;
 
-    @Column
+    @Column(columnDefinition = "TEXT")
     private String travelTips;
 
-    @Column
+    @Column(columnDefinition = "TEXT")
     private String journalEntry;
 
 

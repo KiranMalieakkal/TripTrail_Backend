@@ -36,6 +36,22 @@ public class Controller {
         return ResponseEntity.ok(tripDtos);
     }
 
+    @GetMapping("/forum")
+    public ResponseEntity<List<ForumDto>> getAllTripsForForum() {
+        List<Trip> trips = service.getAllTrips();
+        List<ForumDto> forumDtos = trips.stream()
+                .map(trip -> ForumDto.fromTrip(trip)).toList();
+        return ResponseEntity.ok(forumDtos);
+    }
+
+    @GetMapping("/trips")
+    public ResponseEntity<List<TripDto>> getAllTrips() {
+        List<Trip> trips = service.getAllTrips();
+        List<TripDto> tripDtos = trips.stream()
+                .map(trip -> TripDto.fromTrip(trip)).toList();
+        return ResponseEntity.ok(tripDtos);
+    }
+
     @GetMapping("/{userName}/trips/{tripId}")
     public ResponseEntity<TripDto> getTripsById(@PathVariable long tripId) {
         Trip trip = service.getTripById(tripId);

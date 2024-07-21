@@ -3,6 +3,8 @@ package com.kiran.triptrail.trip.repository;
 import com.kiran.triptrail.trip.model.Trip;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public class TripRepository {
     private final TripDbRepository repo;
@@ -21,5 +23,9 @@ public class TripRepository {
 
     public Trip saveTrip(Trip trip) {
         return repo.save(trip);
+    }
+
+    public List<Trip> findAll() {
+        return repo.findAll();
     }
 }

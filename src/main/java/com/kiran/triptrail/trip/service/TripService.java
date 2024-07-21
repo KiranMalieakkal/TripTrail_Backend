@@ -10,6 +10,8 @@ import com.kiran.triptrail.trip.repository.TripRepository;
 import com.kiran.triptrail.trip.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class TripService {
 
@@ -64,6 +66,10 @@ public class TripService {
 
     public Trip getTripById(long tripId) {
         return tripRepository.findById(tripId);
+    }
+
+    public List<Trip> getAllTrips() {
+        return tripRepository.findAll();
     }
 }
 
